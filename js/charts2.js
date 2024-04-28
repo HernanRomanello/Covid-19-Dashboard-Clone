@@ -3470,39 +3470,11 @@ function updateChartSeries_chart2(chartId) {
     radioButtionPopulation_chart2[values[1]];
 }
 
-function createLevelCheckbox_chart2(level, index, list) {
-  // Function to create a checkbox for a level
-
-  let option = document.createElement("div");
-  let checkbox = document.createElement("input");
-  let span = document.createElement("span");
-
-  option.addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
-
-  checkbox.addEventListener("click", function (e) {
-    handleCheckboxClick_chart2(index);
-    e.stopPropagation();
-  });
-
-  span.textContent = level;
-  option.classList.add("option-country");
-  checkbox.type = "checkbox";
-  checkbox.name = "level-country";
-  checkbox.id = level;
-  checkbox.checked = population_2[level][0];
-  checkbox.value = level;
-
-  option.appendChild(checkbox);
-  option.appendChild(span);
-  list.appendChild(option);
-}
 let selectedRadio2;
 function createRadioButtons_chart2(list) {
   // Function to create radio buttons for time spans
 
-  let Countpopulation = Object.entries(radioButtionCount_chart2);
+  let Countpopulation = Object.entries(radioButtionCount_chart2); // convert the key-value pairs of the bject into an array of arrays
 
   for (let i = 0; i < Countpopulation.length; i++) {
     let option = document.createElement("div");
@@ -3523,7 +3495,6 @@ function createRadioButtons_chart2(list) {
 
     checkbox.addEventListener("click", function (e) {
       calculationNumber[i] = true;
-      alert(i);
       e.stopPropagation();
     });
     if (calculationNumber[i]) {
@@ -3653,17 +3624,6 @@ g1okbutton_chart2.addEventListener("click", function () {
     '<img class="" src ="./pics/down-arrow.svg" width="20" height="20"/>';
 });
 
-function updateYAxisTickPositions(timeSpan) {
-  const key = JSON.stringify(timeSpan);
-  const tickPositions = tickPositionsByTimeSpan_chart2[key] || [];
-
-  chart_2.yAxis[0].update({
-    tickPositions: tickPositions,
-  });
-
-  chart_2.redraw();
-}
-
 function createGraphTimeSpanSelect_chart2(list) {
   list.innerHTML = "";
 
@@ -3672,10 +3632,6 @@ function createGraphTimeSpanSelect_chart2(list) {
 
 function createGraphPupoltionAmountSelect_chart2(list) {
   list.innerHTML = "";
-
-  for (let i = 0; i < levels_chart2.length; i++) {
-    createLevelCheckbox_chart2(levels_chart2[i], i, list);
-  }
 
   createRadioButtons_chart2(list);
 }

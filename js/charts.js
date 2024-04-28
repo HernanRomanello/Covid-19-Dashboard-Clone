@@ -350,13 +350,13 @@ const series = [
   },
 ];
 
-// deep copy
+//  copy
 const showingSeries = JSON.parse(JSON.stringify(series));
 
 const chart = Highcharts.chart("g-1", {
   chart: {
     type: "area",
-    width: 420, // Set the width of the chart
+    width: 420,
     height: 220,
     style: {
       marginInline: "auto",
@@ -430,8 +430,6 @@ const chart = Highcharts.chart("g-1", {
   series: showingSeries,
 });
 
-// G1
-
 const openG1TimeSelect = document.querySelector("#open-g1-time");
 const select_time = document.querySelector("#time-select-g1");
 const g1cancelbutton = document.getElementById("g1-cancel-button");
@@ -497,22 +495,24 @@ const changeSeriesTimeSpan = function (timeSpan) {
   });
 };
 
-// Function to change the time span and update the chart
 function handleTimeSpanChange(checked, value) {
+  // Function to change the time span and update the chart
+
   if (checked) {
     changeSeriesTimeSpan(value);
     updateChartSeries();
   }
 }
 
-// Function to handle checkbox click
 function handleCheckboxClick(index) {
+  // Function to handle checkbox click
+
   seriesMapping[levels[index]][0] = !seriesMapping[levels[index]][0];
-  //updateChartSeries();
 }
 
-// Function to update the chart series based on checked checkboxes
 function updateChartSeries() {
+  // Function to update the chart series based on checked checkboxes
+
   chart.series.forEach((s) => s.remove());
   chart.series.forEach((s) => s.remove());
 
@@ -526,8 +526,9 @@ function updateChartSeries() {
   }
 }
 
-// Function to create a checkbox for a level
 function createLevelCheckbox(level, index, list) {
+  // Function to create a checkbox for a level
+
   let option = document.createElement("div");
   let checkbox = document.createElement("input");
   let span = document.createElement("span");
@@ -554,28 +555,20 @@ function createLevelCheckbox(level, index, list) {
   list.appendChild(option);
 }
 
-// Function to create radio buttons for time spans
 function createRadioButtons(list) {
+  // Function to create radio buttons for time spans
+
   for (let i = 0; i < timeSpans.length; i++) {
     let option = document.createElement("div");
     let checkbox = document.createElement("input");
     let span = document.createElement("span");
-
-    // option.addEventListener("click", function (e) {
-
-    //   e.stopPropagation();
-    // });
 
     option.classList.add("option-country");
     checkbox.type = "radio";
     checkbox.name = "timeSpan-country";
     checkbox.id = timeSpans[i][0];
     checkbox.value = timeSpans[i][1];
-    // if (connt == 0) {
-    //   if (i === 0) checkbox.checked = true;
-    //   connt++;
-    // }
-    // checkbox.checked = true;
+
     if (timeSpanSelection1[i]) {
       checkbox.checked = true;
     }
@@ -587,7 +580,6 @@ function createRadioButtons(list) {
   }
 }
 
-// Event listener for the "OK" button
 g1okbutton.addEventListener("click", function () {
   let selectedRadio = document.querySelector(
     'input[name="timeSpan-country"]:checked'
@@ -595,7 +587,6 @@ g1okbutton.addEventListener("click", function () {
   if (selectedRadio) {
     const value = selectedRadio.value;
     const content = radioButtonContent[value];
-
     handleTimeSpanChange(true, value);
 
     openG1TimeSelect.textContent += ", " + content;
@@ -626,10 +617,7 @@ function createGraphTimeSpanSelect(list) {
   createRadioButtons(list);
 }
 
-let connt = 0;
-
 openG1TimeSelect.addEventListener("click", function () {
-  connt++;
   createGraphTimeSpanSelect(select_time);
   G1Container.classList.toggle("hide");
   const arrow = document.querySelector("#open-g1-time img");
@@ -676,7 +664,6 @@ function changeChartColors(chart, backgroundColor, fontColor) {
         },
         title: {
           useHTML: true,
-          // text: "מספר מאושפזים",
           style: {
             color: fontColor,
           },
@@ -695,9 +682,3 @@ function changeChartColors(chart, backgroundColor, fontColor) {
     });
   }
 }
-
-// changeChartColors(chart, "red", "white");
-
-// changeChartColors(chart, "rgb(255, 255, 255)", "black");
-
-// changeChartColors(chart, "rgb(55,79,96)", "white");

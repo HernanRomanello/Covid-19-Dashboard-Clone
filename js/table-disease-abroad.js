@@ -420,13 +420,13 @@ let countryTableData = [
 
 const timeSpans = [
   ["חודש אחרון", 0.5],
-  ["3 חודשים אחרונים", 1], // no need
+  ["3 חודשים אחרונים", 1],
   ["6 חודשים אחרונים", 6],
   ["שנה אחרונה", 12],
   ["עד עכשיו", 18],
 ];
 
-let timechoice = 0, // no need
+let timechoice = 0,
   dataNumber = 0;
 const mapRank = (rank) => {
   if (rank < 4.5) return "#4DFF00";
@@ -467,31 +467,30 @@ function createTable(tableData, tableBodyId) {
 // Call the function to create the table when the script is loaded
 createTable(countryTableData, "tableBody1");
 
-const country_select = document.getElementById("country-select"); // change to country-select id in html
+const country_select = document.getElementById("country-select");
 const country_select_countries = document.querySelector(
-  "#country-select .countries" // change to country-select id in html
+  "#country-select .countries"
 );
-const country_search_input = document.getElementById("search-country"); // change to search-country id in html
+const country_search_input = document.getElementById("search-country");
 const country_search_input_span = document.querySelector(
-  "#search-country span" // change to search-country id in html
+  "#search-country span"
 );
-const country_searchButton = document.querySelector(".search-button-2"); // change to search-button id in html
-let countryClickCounts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }; // same
-let countryNames = []; // different names
+const country_searchButton = document.querySelector(".search-button-2");
+let countryClickCounts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+let countryNames = [];
 
 for (let i = 0; i < countryTableData.length; i++) {
-  // different names
   countryNames.push(countryTableData[i][0]);
 }
 country_search_input.addEventListener("click", function () {
-  createTimeSpanSelect(country_select_countries); // no need
+  createTimeSpanSelect(country_select_countries);
   country_select.classList.toggle("hide");
-  country_searchButton.classList.toggle("search-button-clicked"); // same
+  country_searchButton.classList.toggle("search-button-clicked");
 });
 
 function resetCountryTable(render) {
   const allCheckboxes = document.querySelectorAll(
-    "#country-select input[type=checkbox]" // change to country-select id in html
+    "#country-select input[type=checkbox]"
   );
   if (render) {
     createTable(countryTableData, "tableBody1");
@@ -528,7 +527,7 @@ function invokeCountryFilter() {
   changeTimeValues(1, dataNumber);
 }
 
-let selectedCountries = []; // change name of selectedCountries
+let selectedCountries = [];
 
 function changeTimeValues(dataNumber, numerator) {
   let copyTable = countryTableData;
@@ -554,10 +553,10 @@ function changeTimeValues(dataNumber, numerator) {
       }
     }
   }
-} // no need
+}
 
 function createTimeSpanSelect(list) {
-  list.innerHTML = ""; // change placeholder
+  list.innerHTML = "";
   list.innerHTML += `
     <center>
     <input onclick="event.stopPropagation(); createCountriesSelect();" placeholder=" חיפוש מדינה..."/>
@@ -596,7 +595,6 @@ function createTimeSpanSelect(list) {
 }
 
 function createCountriesSelect() {
-  // think what to change in the options  // change name of placeholder
   country_select_countries.innerHTML = "";
   country_select_countries.innerHTML += `
   <center>
@@ -621,7 +619,7 @@ function createCountriesSelect() {
         );
       }
 
-      country_search_input_span.innerHTML = // change to selectedCountries
+      country_search_input_span.innerHTML =
         timechoice +
         `
     ,  ${selectedCountries.length} מדינות  
@@ -629,7 +627,6 @@ function createCountriesSelect() {
     `;
 
       if (timechoice == 0) {
-        // no need
         country_search_input_span.innerHTML =
           "3 חודשים אחרונים" +
           `
@@ -640,7 +637,7 @@ function createCountriesSelect() {
       // Stop the event from bubbling up to the parent
       e.stopPropagation();
     });
-    option.classList.add("option-country"); // see how to change the options
+    option.classList.add("option-country");
     checkbox.type = "checkbox";
     checkbox.id = countryNames[i];
     checkbox.name = countryNames[i];
@@ -653,7 +650,6 @@ function createCountriesSelect() {
 }
 
 const dataFromTimeSpan = (multiplier) => {
-  // no need
   if (!multiplier) countryTableData = copyTable(countryDataOriginal);
   else {
     countryTableData = copyTable(countryDataOriginal).map((row) => {
@@ -674,10 +670,9 @@ const dataFromTimeSpan = (multiplier) => {
   createTable(countryTableData, "tableBody1");
 };
 
-const countryDataOriginal = copyTable(countryTableData); // change name of countryDataOriginal
+const countryDataOriginal = copyTable(countryTableData);
 
 function copyTable(table) {
-  // remain the same
   let newTable = [];
   for (var row in table) {
     newTable.push([...table[row]]);
@@ -685,7 +680,7 @@ function copyTable(table) {
   return newTable;
 }
 const countryTableArrows = {
-  0: document.querySelector("#table-arrow-countries-1"), // change to table-arrow-countries-1 id in html
+  0: document.querySelector("#table-arrow-countries-1"),
   1: document.querySelector("#table-arrow-countries-2"),
   2: document.querySelector("#table-arrow-countries-3"),
   3: document.querySelector("#table-arrow-countries-4"),
@@ -695,7 +690,6 @@ const countryTableArrows = {
 
 // Function to sort the table
 function sortCountryTable(columnIndex) {
-  // change  if needed
   const isNumber = columnIndex >= 2;
   if (countryClickCounts[columnIndex] === 0) {
     countryTableArrows[columnIndex].classList.remove("table-arrow-up");

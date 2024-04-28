@@ -217,7 +217,6 @@ function createSettlementSelect() {
     <br/>
   `;
   for (let i = 0; i < settlementNames.length; i++) {
-    // think what to change in the options
     let span = document.createElement("span");
 
     span.addEventListener("click", function (e) {
